@@ -1,5 +1,7 @@
 # Verbundarchiv-Rechner
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24044171.svg)](https://doi.org/10.5281/zenodo.24044171)
+
 Erste Abschätzung der Baukosten kommunaler Verbundarchivgebäude in Rheinland-Pfalz: Aus Zahl, Art und Einwohnerzahl der Verbundpartner leitet der Rechner ein Raumprogramm ab, berechnet Flächen (NUF, BGF), Bruttogebäudekosten und Gesamtkosten der KG 200–700 und vergleicht das Verbundarchiv über 30 Jahre mit dem Verwahrungs- und Verwaltungsvertrag mit dem Land.
 
 **Online nutzen:** https://simonschmitz3-89.github.io/verbundarchiv-rechner/
@@ -31,4 +33,4 @@ Alle Kennwerte und Formeln lassen sich im Rechner im Abschnitt „Rechenwerk“ 
 
 Inhalt und Code: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.de) – frei nutzbar und veränderbar mit Namensnennung.
 Eingebettete Fremdbestandteile: three.js r128 (MIT), Archivo und IBM Plex Mono (SIL Open Font License 1.1).
-Zitiervorschlag: siehe `CITATION.cff` bzw. die Schaltfläche „Cite this repository“ auf GitHub.
+Zitiervorschlag: Schmitz, Simon: Verbundarchiv-Rechner. Abschätzung der Baukosten kommunaler Verbundarchivgebäude, Version 1.0.0, 2026, https://doi.org/10.5281/zenodo.24044171 – siehe auch `CITATION.cff` bzw. die Schaltfläche „Cite this repository“ auf GitHub.
