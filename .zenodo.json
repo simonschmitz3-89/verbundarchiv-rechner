@@ -1,0 +1,9 @@
+{
+  "title": "Verbundarchiv-Rechner: Abschätzung der Baukosten kommunaler Verbundarchivgebäude",
+  "upload_type": "software",
+  "description": "<p>Webbasierter Rechner zur ersten Abschätzung der Baukosten kommunaler Verbundarchivgebäude in Rheinland-Pfalz (Raumprogramm, NUF, BGF, Bruttogebäudekosten, Gesamtkosten KG 200–700) mit Vergleich zum Verwahrungs- und Verwaltungsvertrag über 30 Jahre. Spin-off der Transferarbeit von Simon Schmitz (2026) im Archivreferendariat der Landesarchivverwaltung Rheinland-Pfalz, Archivschule Marburg. Private Veröffentlichung des Verfassers.</p>",
+  "creators": [{"name": "Schmitz, Simon"}],
+  "license": "cc-by-4.0",
+  "language": "deu",
+  "keywords": ["Archivbau", "Verbundarchiv", "Kommunalarchiv", "Baukosten", "Rheinland-Pfalz", "DIN 67700", "Archivberatung"]
+}

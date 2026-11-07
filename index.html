@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Verbundarchiv-Rechner</title>
+<meta name="description" content="Erste Abschätzung der Baukosten kommunaler Verbundarchivgebäude in Rheinland-Pfalz: Raumprogramm, Flächen, Kosten und Vergleich mit dem Verwahrungsvertrag.">
+<style>
+@font-face{font-family:'Archivo';font-style:normal;font-display:swap;font-weight:100 900;font-stretch:62% 125%;src:url(fonts/archivo-latin-wdth-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Archivo';font-style:normal;font-display:swap;font-weight:100 900;font-stretch:62% 125%;src:url(fonts/archivo-latin-ext-wdth-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+20A0-20AB,U+20AD-20C0,U+2C60-2C7F,U+A720-A7FF}
+:root{--bg:#f6f4f1;--panel:#fff;--ink:#1e2024;--muted:#5b6270;--line:#e3e0db;--accent:#8f1936;--accent-soft:#f4e7ea}
+@media (prefers-color-scheme:dark){:root{--bg:#16171a;--panel:#1f2125;--ink:#ecebe8;--muted:#a3a8b2;--line:#33363c;--accent:#d8607d;--accent-soft:#3a2229}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 'Archivo','Helvetica Neue',Arial,sans-serif}
+main{max-width:860px;margin:0 auto;padding:48px 16px 64px}
+.kicker{font-size:13px;font-weight:650;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+h1{font-size:clamp(32px,6vw,48px);font-weight:800;font-stretch:85%;line-height:1.05;letter-spacing:-.01em;margin:0 0 16px}
+.lead{font-size:19px;color:var(--muted);margin:0 0 28px;max-width:46em}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:40px}
+.btn{display:inline-block;padding:11px 18px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--ink);text-decoration:none;font-weight:650}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn[aria-disabled=true]{color:var(--muted);pointer-events:none}
+section{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px 26px;margin-bottom:18px}
+h2{font-size:22px;font-weight:750;font-stretch:90%;margin:0 0 12px}
+h3{font-size:17px;margin:18px 0 6px}
+p{margin:0 0 12px}
+ul,ol{margin:0 0 12px;padding-left:22px}
+li{margin-bottom:6px}
+.figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:16px 0 4px}
+.fig{background:var(--accent-soft);border-radius:10px;padding:12px 14px}
+.fig b{display:block;font-size:24px;font-stretch:85%;color:var(--accent)}
+.fig span{font-size:14px;color:var(--muted)}
+.note{font-size:14px;color:var(--muted)}
+code,pre{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:14px}
+pre{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:12px;overflow-x:auto;white-space:pre-wrap}
+a{color:var(--accent)}
+footer{font-size:14px;color:var(--muted);margin-top:28px}
+</style>
+</head>
+<body>
+<main>
+<p class="kicker">Spin-off einer Transferarbeit · Archivschule Marburg 2026</p>
+<h1>Verbundarchiv-Rechner</h1>
+<p class="lead">Was kostet ein gemeinsames Archivgebäude für Landkreis, Verbandsgemeinden und Städte? Der Rechner leitet aus Zahl, Art und Einwohnerzahl der Verbundpartner ein Raumprogramm ab, berechnet Flächen und Baukosten und vergleicht das Verbundarchiv über 30 Jahre mit dem Verwahrungs- und Verwaltungsvertrag mit dem Land.</p>
+<div class="actions">
+  <a class="btn primary" href="rechner.html">Rechner im Browser öffnen</a>
+  <a class="btn" href="rechner.html" download="Verbundarchiv-Rechner.html">Herunterladen (eine HTML-Datei)</a>
+  <a class="btn" aria-disabled="true">Transferarbeit (Veröffentlichung in Vorbereitung)</a>
+</div>
+
+<section>
+<h2>Kurzfassung der Arbeit</h2>
+<p>In Rheinland-Pfalz verfügt nur etwa die Hälfte der Kommunen über eine Archivlösung im Sinne des Landesarchivgesetzes; nur rund ein Viertel unterhält ein eigenes Archiv vor Ort. Der Verwahrungs- und Verwaltungsvertrag mit dem Landesarchiv ist rechtssicher, bietet aber nur eine Grundbetreuung. Archivverbünde mehrerer Kommunen gelten als Alternative. Ihre größte Hürde sind die Startkosten, vor allem für ein geeignetes Gebäude. Die Arbeit fragt deshalb, wie hoch diese Kosten sind und wie stark sie mit wachsender Verbundgröße je Einwohner sinken.</p>
+<ol>
+<li><b>Kostendatenbasis:</b> 23 deutsche Archivneubauten der Jahre 2015 bis 2025 wurden recherchiert; für neun Kommunalarchive lagen belastbare Werte zu Bruttogrundfläche und Bruttogebäudekosten (KG 300 und 400 nach DIN 276) vor. Über den Baupreisindex auf 2025 fortgeschrieben, ergeben sie im Mittel 3.088,24 € je m² BGF.</li>
+<li><b>Raumprogramm:</b> Für einen Modellverbund aus einem Landkreis, vier Verbandsgemeinden und einer verbandsfreien Stadt (rund 218.000 Einwohner) wurde auf Basis von E DIN 67700, DIN-Fachbericht 13, Arbeitsstättenregeln und ausgewerteten Bauplänen ein Raumprogramm entwickelt: Lesesaal, Foyer, Magazin für einen 30-Jahres-Zuwachs (rund 2.660 Regalmeter), Anlieferung mit Quarantäne und Trockenreinigung, Verwaltung für rund 7 VZÄ.</li>
+<li><b>Rechner:</b> Allein aus Einwohnerzahl sowie Zahl und Art der beteiligten Kommunen ergeben sich Nutzungsfläche, BGF, Bruttogebäudekosten und über BKI-Aufschläge die Gesamtkosten der KG 200 bis 700.</li>
+<li><b>Ergebnis:</b> Verbünde senken die Baukosten je Einwohner deutlich. Bei reinen Zusammenschlüssen von Verbandsgemeinden sinken sie bis etwa sechs Partner am stärksten. Mit einem Landkreis liegt ein Verbund sofort unter dem Mittel der Vergleichsbauten.</li>
+</ol>
+<div class="figs">
+  <div class="fig"><b>1.228 m²</b><span>Nutzungsfläche Modellverbund</span></div>
+  <div class="fig"><b>1.670 m²</b><span>Bruttogrundfläche</span></div>
+  <div class="fig"><b>7,27 Mio. €</b><span>Kosten KG 200–700</span></div>
+  <div class="fig"><b>33,27 €</b><span>je Einwohner</span></div>
+</div>
+<p class="note">Werte des Rechners in Version 1.0.0; sie weichen wegen der unten genannten Korrekturen leicht von der veröffentlichten Arbeit ab.</p>
+</section>
+
+<section>
+<h2>So nutzen Sie den Rechner</h2>
+<ol>
+<li><b>Verbundpartner eintragen:</b> Landkreise, Verbandsgemeinden und verbandsfreie Gemeinden mit ihrer Einwohnerzahl hinzufügen oder ein vorbereitetes Szenario wählen.</li>
+<li><b>Ergebnis lesen:</b> Raumbuch mit allen Räumen, 3D-Modell, Flächen nach Bereichen, Kosten nach Kostengruppen und die Kosten je Einwohner.</li>
+<li><b>Annahmen anpassen:</b> Im „Rechenwerk“ unten stehen alle Kennwerte und Formeln mit Quelle. Jeder Wert und jede Formel lässt sich ändern, mit ↺ zurücksetzen oder über „Werte der Arbeit laden“ auf den Ausgangsstand bringen.</li>
+<li><b>Stand sichern und weitergeben:</b> Eigene Eingaben bleiben im jeweiligen Browser gespeichert. Über „Exportieren (.json)“ lässt sich ein Stand als Datei sichern und mit „Importieren“ auf einem anderen Rechner wieder laden.</li>
+</ol>
+<p>Die heruntergeladene Datei funktioniert ohne Installation und ohne Internetverbindung in jedem aktuellen Browser. Sie sendet keine Daten; gespeichert wird nur lokal im Browser.</p>
+</section>
+
+<section>
+<h2>Was der Rechner nicht leistet</h2>
+<ul>
+<li>Er liefert einen <b>Kostenrahmen</b> zur ersten Orientierung im Beratungsprozess, keine Kostenschätzung oder -berechnung im Sinne der DIN 276 und keine Fachplanung.</li>
+<li>Die Kostenbasis beruht auf neun Bauten (keiner davon in Rheinland-Pfalz); reale Projekte weichen standort- und projektbezogen nach oben und unten ab.</li>
+<li>Die Zugangsmengen für das Magazin sind auf Rheinland-Pfalz ausgelegt. Für andere Länder sollten sie angepasst werden.</li>
+<li>Ab 30 Nutzerplätzen im Lesesaal ist eine Kappung gesetzt; sehr große Verbünde bildet der Rechner nur eingeschränkt ab.</li>
+<li>Kosten für Grundstück (KG 100) und Finanzierung (KG 800) sind nicht enthalten.</li>
+</ul>
+</section>
+
+<section>
+<h2>Änderungen gegenüber der veröffentlichten Arbeit</h2>
+<p>Der Rechner ersetzt den Excel-Rechner der Arbeit. Bei der Überarbeitung wurden folgende Punkte korrigiert oder ergänzt:</p>
+<ul>
+<li>Garderobenfläche im Foyer nicht mehr doppelt gezählt</li>
+<li>Aufschläge für KG 200, 500, 600 und 700 auf den indexierten Wert der Bruttogebäudekosten</li>
+<li>Überformate nur einmal (im Planschrank) berücksichtigt</li>
+<li>Bibliotheksfläche nach der Gleichung der E DIN 67700</li>
+<li>Personal-WCs mit 12,05 m²</li>
+<li>neu: Vergleich mit dem Verwahrungs- und Verwaltungsvertrag über 30 Jahre, mit Personalkosten nach den Personalkostensätzen des Landesamts für Finanzen Rheinland-Pfalz</li>
+</ul>
+<p class="note">Alle Änderungen zwischen den Versionen stehen im <a href="https://github.com/simonschmitz3-89/verbundarchiv-rechner/blob/main/CHANGELOG.md">Änderungsprotokoll</a>.</p>
+</section>
+
+<section>
+<h2>Zitieren, Lizenz, Kontakt</h2>
+<p><b>Zitiervorschlag:</b></p>
+<pre>Schmitz, Simon: Verbundarchiv-Rechner. Abschätzung der Baukosten kommunaler Verbundarchivgebäude, Version 1.0.0, 2026.</pre>
+<p><b>Zugrunde liegende Arbeit:</b> Simon Schmitz, Abschätzung der Baukosten eines kommunalen Verbundarchivgebäudes in Rheinland-Pfalz in verschiedenen Verbundszenarien mit Konzentration auf den Neubau, Transferarbeit im Archivreferendariat der Landesarchivverwaltung Rheinland-Pfalz, Archivschule Marburg 2026.</p>
+<p><b>Lizenz:</b> <a href="https://creativecommons.org/licenses/by/4.0/deed.de">CC BY 4.0</a>. Sie dürfen den Rechner frei nutzen, weitergeben und anpassen, auch für eigene Beratungen, solange Sie den Urheber nennen. Eingebettete Fremdbestandteile: three.js (MIT-Lizenz), Schriften Archivo und IBM Plex Mono (SIL Open Font License 1.1).</p>
+<p><b>Kontakt:</b> <a href="mailto:s.schmitz@lav.rlp.de">s.schmitz@lav.rlp.de</a> – Hinweise, Korrekturen und Erfahrungen aus eigenen Projekten sind willkommen.</p>
+</section>
+
+<footer>
+<p>Private Veröffentlichung des Verfassers, keine amtliche Auskunft der Landesarchivverwaltung Rheinland-Pfalz. Diese Seite wird über GitHub Pages ausgeliefert; dabei verarbeitet GitHub technisch notwendige Zugriffsdaten (<a href="https://docs.github.com/de/site-policy/privacy-policies/github-general-privacy-statement">Datenschutzerklärung von GitHub</a>). Die Seite selbst setzt keine Cookies, lädt keine externen Schriften und verwendet keine Analysewerkzeuge.</p>
+<p>Quellcode und alle Versionen: <a href="https://github.com/simonschmitz3-89/verbundarchiv-rechner">github.com/simonschmitz3-89/verbundarchiv-rechner</a></p>
+</footer>
+</main>
+</body>
+</html>

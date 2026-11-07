@@ -1,0 +1,29 @@
+cff-version: 1.2.0
+message: "Wenn Sie den Rechner verwenden, zitieren Sie ihn bitte so."
+title: "Verbundarchiv-Rechner: Abschätzung der Baukosten kommunaler Verbundarchivgebäude"
+type: software
+authors:
+  - family-names: Schmitz
+    given-names: Simon
+version: 1.0.0
+date-released: 2026-11-10
+license: CC-BY-4.0
+repository-code: "https://github.com/simonschmitz3-89/verbundarchiv-rechner"
+url: "https://simonschmitz3-89.github.io/verbundarchiv-rechner/"
+keywords:
+  - Archivbau
+  - Verbundarchiv
+  - Kommunalarchiv
+  - Baukosten
+  - Rheinland-Pfalz
+  - DIN 67700
+references:
+  - type: thesis
+    title: "Abschätzung der Baukosten eines kommunalen Verbundarchivgebäudes in Rheinland-Pfalz in verschiedenen Verbundszenarien mit Konzentration auf den Neubau"
+    authors:
+      - family-names: Schmitz
+        given-names: Simon
+    year: 2026
+    institution:
+      name: "Archivschule Marburg"
+    notes: "Transferarbeit im Archivreferendariat der Landesarchivverwaltung Rheinland-Pfalz"
