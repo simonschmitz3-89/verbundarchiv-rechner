@@ -5,8 +5,8 @@ type: software
 authors:
   - family-names: Schmitz
     given-names: Simon
-version: 1.0.0
-date-released: 2026-11-10
+version: 1.0.2
+date-released: 2026-11-09
 doi: 10.5281/zenodo.24044170
 license: CC-BY-4.0
 repository-code: "https://github.com/simonschmitz3-89/verbundarchiv-rechner"
