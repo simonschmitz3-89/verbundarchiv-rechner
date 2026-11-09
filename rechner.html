@@ -268,7 +268,7 @@ summary::after{content:"+";color:var(--muted)} details[open] summary::after{cont
     <div class="eyebrow"><span id="h-deg">Gesamtkosten KG 200–700 je Einwohner nach Verbundgröße</span>
       <span class="chips"><label class="hint" for="vgSize">EW je VG</label><input type="number" id="vgSize" style="width:90px" step="500" min="2000"></span></div>
     <div class="chart-wrap" id="degWrap"></div>
-    <p class="note">Gesamtkosten KG 200–700 (ohne Grundstück KG 100 und Finanzierung KG 800) je gezähltem Einwohner. Beide Kurven verwenden die aktuellen Annahmen. Gestrichelt: dein oben eingestellter Verbund. Gepunktet: Mittel der neun Vergleichsbauten (26,7 € je EW für KG 300+400, hochgerechnet mit den aktuellen KG-Aufschlägen und dem Index).</p>
+    <p class="note">Gesamtkosten KG 200–700 (ohne Grundstück KG 100 und Finanzierung KG 800) je gezähltem Einwohner. Beide Kurven verwenden die aktuellen Annahmen. Kräftig gestrichelt mit Raute: dein oben eingestellter Verbund. Gepunktet: Mittel der neun Vergleichsbauten (26,7 € je EW für KG 300+400, hochgerechnet mit den aktuellen KG-Aufschlägen und dem Index).</p>
   </section>
   <section class="card" aria-labelledby="h-30">
     <div class="eyebrow"><span id="h-30">Vergleich mit dem Vertrag über 30 Jahre</span></div>
@@ -1884,17 +1884,18 @@ function renderDeg(){
   const cur = R.proEW; const yc=y(Math.min(cur,ymax));
   const bench = 26.74*(1+state.kg200+state.kg500+state.kg600+state.kg700)*(state.bpiAktuell/state.bpiBasis); const yb=y(bench);
   const svg = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Kosten je Einwohner nach Anzahl der Verbandsgemeinden, mit und ohne Landkreis">${g}
-   ${cur?`<line x1="${ml}" x2="${ml+pw}" y1="${yc}" y2="${yc}" stroke="var(--ink)" stroke-dasharray="4 4" stroke-width="1" opacity=".6"/>`:''}
+   ${cur?`<line x1="${ml}" x2="${ml+pw}" y1="${yc}" y2="${yc}" stroke="var(--ink)" stroke-dasharray="7 4" stroke-width="2.5"/>`:''}
    <line x1="${ml}" x2="${ml+pw}" y1="${yb}" y2="${yb}" stroke="var(--muted)" stroke-dasharray="1 3" stroke-width="1.5"/>
    <path d="${path(A)}" fill="none" stroke="var(--s-a)" stroke-width="2" stroke-linejoin="round"/>
    <path d="${path(B)}" fill="none" stroke="var(--s-b)" stroke-width="2" stroke-linejoin="round"/>
    <circle cx="${x(N)}" cy="${y(A[N-1])}" r="4" fill="var(--s-a)" stroke="var(--panel)" stroke-width="2"/>
    <circle cx="${x(N)}" cy="${y(B[N-1])}" r="4" fill="var(--s-b)" stroke="var(--panel)" stroke-width="2"/>
-   ${endLabels([[y(A[N-1]),'nur VGen · '+fmt(A[N-1],0)+' €'],[y(B[N-1]),'mit Landkreis · '+fmt(B[N-1],0)+' €'],[yb,'Ø Vergleichsbauten · '+fmt(bench,0)+' €']].concat(cur?[[yc,'dein Verbund · '+fmt(cur,0)+' €']]:[]), x(N)+10)}
+   ${cur?`<rect x="${x(N)-6}" y="${yc-6}" width="12" height="12" transform="rotate(45 ${x(N)} ${yc})" fill="var(--ink)" stroke="var(--panel)" stroke-width="2"/>`:''}
+   ${endLabels([[y(A[N-1]),'nur VGen · '+fmt(A[N-1],0)+' €'],[y(B[N-1]),'mit Landkreis · '+fmt(B[N-1],0)+' €'],[yb,'Ø Vergleichsbauten · '+fmt(bench,0)+' €']].concat(cur?[[yc,'dein Verbund · '+fmt(cur,0)+' €',true]]:[]), x(N)+10)}
    <line id="xh" x1="0" x2="0" y1="${mt}" y2="${mt+ph}" stroke="var(--muted)" stroke-width="1" opacity="0"/>
    <rect x="${ml}" y="${mt}" width="${pw}" height="${ph}" fill="transparent" id="hit"/></svg>`;
   const wrap=$('#degWrap');
-  wrap.innerHTML = `<div class="barleg" style="margin-bottom:4px"><span><i style="background:var(--s-a)"></i>nur Verbandsgemeinden</span><span><i style="background:var(--s-b)"></i>Landkreis (127.118 EW) + Verbandsgemeinden</span></div>`+svg+'<div class="tt" hidden id="degTT"></div>';
+  wrap.innerHTML = `<div class="barleg" style="margin-bottom:4px"><span><i style="background:var(--s-a)"></i>nur Verbandsgemeinden</span><span><i style="background:var(--s-b)"></i>Landkreis (127.118 EW) + Verbandsgemeinden</span>${cur?`<span style="color:var(--ink);font-weight:700"><i style="background:var(--ink);transform:rotate(45deg) scale(.8)"></i>dein Verbund (${fmt(R.ewSum,0)} EW) · ${fmt(cur,0)} €</span>`:''}</div>`+svg+'<div class="tt" hidden id="degTT"></div>';
   const svgEl=wrap.querySelector('svg'), hit=wrap.querySelector('#hit'), xh=wrap.querySelector('#xh'), tt=wrap.querySelector('#degTT');
   hit.addEventListener('mousemove',e=>{
     const pt=svgEl.createSVGPoint(); pt.x=e.clientX; pt.y=e.clientY; const p=pt.matrixTransform(svgEl.getScreenCTM().inverse());
@@ -1908,7 +1909,7 @@ function renderDeg(){
 function endLabels(items, x){ // vertikal entzerren, Mindestabstand 14 px
   const it=items.map(([y,t],i)=>({y,t,i})).sort((a,b)=>a.y-b.y);
   for(let k=1;k<it.length;k++) if(it[k].y-it[k-1].y<14) it[k].y=it[k-1].y+14;
-  return it.map(o=>`<text x="${x}" y="${o.y+4}" font-size="11.5" fill="var(--ink)">${o.t}</text>`).join('');
+  return it.map(o=>`<text x="${x}" y="${o.y+4}" font-size="11.5" fill="var(--ink)" font-weight="${items[o.i][2]?700:400}">${o.t}</text>`).join('');
 }
 function niceStep(s){ const p=Math.pow(10,Math.floor(Math.log10(s))); const m=s/p; return (m<=1?1:m<=2?2:m<=5?5:10)*p; }
 

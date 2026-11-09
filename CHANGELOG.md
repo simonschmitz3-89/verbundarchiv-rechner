@@ -1,5 +1,9 @@
 # Änderungsprotokoll
 
+## 1.0.1 – 9. November 2026
+
+- Diagramm „Kosten je Einwohner nach Verbundgröße“: der gerade eingestellte Verbund („dein Verbund“) ist deutlicher hervorgehoben (kräftige Linie, Raute, Legendeneintrag mit Einwohnerzahl)
+
 ## 1.0.0 – November 2026 (Tag der Archivberatung, 10.11.2026)
 
 Erste öffentliche Fassung. Ersetzt den Excel-Rechner der Transferarbeit.
