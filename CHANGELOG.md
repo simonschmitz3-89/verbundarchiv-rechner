@@ -1,5 +1,9 @@
 # Änderungsprotokoll
 
+## 1.0.2 – 9. November 2026
+
+- Versionsnummer und Stand oben unter dem Titel; Knopf „auf neue Version prüfen“ (fragt nur auf Klick `version.json` auf der Projektseite ab)
+
 ## 1.0.1 – 9. November 2026
 
 - Diagramm „Kosten je Einwohner nach Verbundgröße“: der gerade eingestellte Verbund („dein Verbund“) ist deutlicher hervorgehoben (kräftige Linie, Raute, Legendeneintrag mit Einwohnerzahl)

@@ -108,6 +108,9 @@ summary::after{content:"+";color:var(--muted)} details[open] summary::after{cont
 .hint{font-size:12px;color:var(--muted)}
 #fallback[hidden]{display:none}
 #werk{scroll-margin-top:24px}
+.ver{font:500 12px var(--f-num);color:var(--muted);margin:2px 0 6px}
+.vlink{border:0;background:none;padding:0;font:inherit;color:var(--accent);text-decoration:underline;cursor:pointer}
+#verMsg b,#verMsg a{color:var(--accent)}
 .foot a{color:var(--accent)}
 #fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;color:var(--muted)}
 /* KPI */
@@ -156,6 +159,7 @@ summary::after{content:"+";color:var(--muted)} details[open] summary::after{cont
 <header class="top">
   <div>
     <h1>Verbundarchiv-<span>Baukostenrechner</span></h1>
+    <div class="ver">Version 1.0.2 · Stand 09.11.2026 · <button type="button" class="vlink" id="verCheck">auf neue Version prüfen</button> <span id="verMsg"></span></div>
     <p>Raumprogramm und Baukosten eines kommunalen Verbundarchivs in Rheinland-Pfalz. Verbundpartner wählen, Räume im Modell anklicken und Maße oder Ausstattung ändern. Die Kosten rechnen sofort mit.</p>
   </div>
   <div class="chips">
@@ -294,7 +298,7 @@ summary::after{content:"+";color:var(--muted)} details[open] summary::after{cont
   <div id="werkImport" hidden style="margin-top:10px"><textarea id="wText" rows="5" style="width:100%;font:12px var(--f-num)" placeholder="Exportierten Text hier einfügen …"></textarea><div class="chips" style="margin-top:6px"><button class="btn primary" id="wTextGo">Übernehmen</button><button class="btn" id="wFileGo">Datei wählen …</button></div></div>
 </details>
 
-<p class="foot" id="about"><b>Über diesen Rechner.</b> Der Rechner ist ein Spin-off der Transferarbeit von Simon Schmitz (2026) im Archivreferendariat der Landesarchivverwaltung Rheinland-Pfalz: „Abschätzung der Baukosten eines kommunalen Verbundarchivgebäudes in Rheinland-Pfalz in verschiedenen Verbundszenarien mit Konzentration auf den Neubau“, Archivschule Marburg (Veröffentlichung in Vorbereitung). Private Veröffentlichung des Verfassers, keine amtliche Auskunft der Landesarchivverwaltung. Kontakt: <a href="mailto:s.schmitz@lav.rlp.de">s.schmitz@lav.rlp.de</a>. Version 1.0.0 · Lizenz <a href="https://creativecommons.org/licenses/by/4.0/deed.de" target="_blank" rel="noopener">CC BY 4.0</a> · Download und Hinweise: <a href="https://simonschmitz3-89.github.io/verbundarchiv-rechner/" target="_blank" rel="noopener">https://simonschmitz3-89.github.io/verbundarchiv-rechner/</a> · Zitieren: <a href="https://doi.org/10.5281/zenodo.24044170" target="_blank" rel="noopener">doi:10.5281/zenodo.24044170</a></p>
+<p class="foot" id="about"><b>Über diesen Rechner.</b> Der Rechner ist ein Spin-off der Transferarbeit von Simon Schmitz (2026) im Archivreferendariat der Landesarchivverwaltung Rheinland-Pfalz: „Abschätzung der Baukosten eines kommunalen Verbundarchivgebäudes in Rheinland-Pfalz in verschiedenen Verbundszenarien mit Konzentration auf den Neubau“, Archivschule Marburg (Veröffentlichung in Vorbereitung). Private Veröffentlichung des Verfassers, keine amtliche Auskunft der Landesarchivverwaltung. Kontakt: <a href="mailto:s.schmitz@lav.rlp.de">s.schmitz@lav.rlp.de</a>. Version 1.0.2 · Lizenz <a href="https://creativecommons.org/licenses/by/4.0/deed.de" target="_blank" rel="noopener">CC BY 4.0</a> · Download und Hinweise: <a href="https://simonschmitz3-89.github.io/verbundarchiv-rechner/" target="_blank" rel="noopener">https://simonschmitz3-89.github.io/verbundarchiv-rechner/</a> · Zitieren: <a href="https://doi.org/10.5281/zenodo.24044170" target="_blank" rel="noopener">doi:10.5281/zenodo.24044170</a></p>
 <p class="foot">Grundlage: Simon Schmitz, Transferarbeit Archivschule Marburg (2026), Kap. 2, und der zugehörige Excel-Rechner. Flächenwerte nach DIN 67700, DIN-Fachbericht 13, ASR und ausgewerteten Archivneubauten; Kosten 3.088,24 €/m² BGF (Mittel aus neun Kommunalarchivbauten, Preisstand 2025), Aufschläge KG 200/500/600/700 nach BKI 2025. Erste Orientierung im Sinne eines Kostenrahmens, keine Fachplanung. Gegenüber der früheren Excel-Datei korrigiert: Garderobenfläche nicht doppelt, KG-Aufschläge auf den indexierten Wert, Überformate nur einmal (im Planschrank), Bibliotheksfläche nach DIN-Gleichung, Personal-WCs 12,05 m². Der Rechner ersetzt die Excel-Datei; alle Kennwerte und Formeln stehen im Rechenwerk unten. Eigene Eingaben bleiben in diesem Browser gespeichert; „Alles zurücksetzen“ (oben rechts) stellt die Ausgangswerte wieder her.</p>
 
 <script>/* three.js r128, MIT-Lizenz *//**
@@ -2264,6 +2268,17 @@ document.addEventListener('keydown',e=>{ if(e.key==='Escape' && ui.sel){ ui.sel=
 try{ scene3d=make3D(); }catch(err){ console.error(err); scene3d=null; }
 if(!scene3d) $('#fallback').hidden=false;
 update({refit:true});
+})();
+
+// ---------- Versionsprüfung (nur auf Klick; fragt version.json auf der Projektseite ab)
+(function(){ const V='1.0.2', PAGE='https://simonschmitz3-89.github.io/verbundarchiv-rechner/'; const btn=document.getElementById('verCheck'), msg=document.getElementById('verMsg'); if(!btn) return;
+  const cmp=(a,b)=>{const x=a.split('.').map(Number),y=b.split('.').map(Number);for(let i=0;i<3;i++){if((x[i]||0)!==(y[i]||0))return (x[i]||0)-(y[i]||0);}return 0;};
+  btn.addEventListener('click', async()=>{ msg.textContent='prüfe …';
+    try{ const r=await fetch(PAGE+'version.json?'+Date.now(),{cache:'no-store'}); const j=await r.json();
+      if(cmp(j.version,V)>0){ msg.innerHTML='<b>Neue Version '+j.version+' (Stand '+j.stand+') verfügbar</b> – <a href="'+PAGE+'" target="_blank" rel="noopener">zur Seite</a>'; }
+      else msg.textContent='✓ Das ist die aktuelle Version.';
+    }catch(e){ msg.innerHTML='Prüfung hier nicht möglich (keine Verbindung). Aktuelle Version: <a href="'+PAGE+'" target="_blank" rel="noopener">'+PAGE.replace(/^https:\/\//,'')+'</a>'; }
+  });
 })();
 </script>
 </body></html>
